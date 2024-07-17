@@ -1,0 +1,175 @@
+#parent {
+	text-align: center;
+}
+#parent > * {
+	margin-bottom: 10px;
+}
+
+#timer {
+	font-size: 18px;
+}
+#text {
+	font-size: 17px;
+	font-style: italic;
+}
+
+article.prediction button {
+	padding: 5px 10px;
+	font-size: 15px;
+	cursor: pointer;
+}
+article.prediction button:not(.active) {
+	display: none;
+}
+
+
+/* Autofill section */
+
+#parent-autofill {
+	position: relative;
+}
+#autofill-input {
+	padding: 5px;
+	font-size: 18px;
+	width: 250px;
+}
+
+#parent-autofill ul {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	background-color: white;
+	z-index: 100;
+}
+#parent-autofill li {
+	border: 1px solid gray;
+	width: 250px;
+	font-size: 18px;
+	padding: 5px;
+	background-color: rgb(7, 100, 182);
+	color: aliceblue;
+	
+	z-index: 100;
+}
+#parent-autofill li:hover {
+	border: 1px solid black;
+	cursor: pointer;
+	
+}
+
+
+/* spoiler section */
+
+
+p.spoiler:not(.active) {
+	display: none;
+}
+
+.spoiler-container {
+	position: relative;
+	z-index: 1;
+}
+
+.spoiler-container::after {
+	content: '<';
+	display: inline-block;
+	transform: rotate(-90deg);
+	text-shadow: 1px 1px 1px black;
+	
+	z-index: 1;
+}
+
+ul.tabs-nav-list {
+	margin: 0;
+	list-style: none;
+	padding: 0;
+	display: flex;
+	gap: 10px;
+}
+
+
+
+.tab:not(.active) {
+	display: none;
+}
+
+.tabs-nav-item {
+	padding: 10px;
+}
+
+.tabs-nav-item:not(.active) {
+	background-color: rgb(255, 255, 255);
+	border: 1px solid black;
+}
+.tabs-nav-item:not(.active):hover {
+	background-color: rgb(224, 224, 224);
+}
+
+.tabs-nav-item {
+	background-color: rgb(180, 180, 180);
+
+}
+
+.tabs {
+	padding: 10px;
+	background-color: rgb(180, 180, 180);
+	width: 300px;
+	height: 150px;
+}
+
+/* accordeon section */
+
+.accordeon-parent {
+	width: 50vw;
+	margin: 0 auto;
+}
+
+.accordeon-button {
+	width: 100%;
+}
+
+.accordeon-description {
+
+	text-align: left;
+	padding: 10px;
+	height: 150px;
+	border: 1px dashed red;
+}
+
+.accordeon-description:not(.active) {
+	display: none;
+}
+
+/* Cities block */
+
+/* To do list */
+
+.toDo-list {
+	list-style: none;
+	padding: 0;
+}
+
+.toDo-list li.done {
+	list-style: url(Images/accept-checklist.svg);
+}
+
+.toggleDoneButton {
+	border: none;
+	width: 0.8rem;
+	height: 0.8rem;
+	margin-right: 5px;
+	background: no-repeat center/cover url(Images/cancel-checklist.svg);
+}
+.toggleDoneButton.done {
+	background: no-repeat center/cover url(Images/accept-checklist.svg);
+}
+
+.toDo-removeButton {
+	border: none;
+	width: 1rem;
+	height: 1rem;
+	margin-right: 5px;
+	background: no-repeat center/cover url(Images/trash-svgrepo-com.svg);
+}
+/* To do list end */

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="normalize.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <title>Prediction site</title>
+  </head>
+  <body>
+    <header class="header"></header>
+
+    <main class="main">
+      <article class="prediction">
+        <fieldset class="prediction-block">
+          <legend>Prediction Block</legend>
+          <div id="parent">
+            <div id="timer">?</div>
+            <div id="text"></div>
+            <button id="start" class="active">Know thy destiny</button>
+            <button id="stop">Obtain the knowledge</button>
+          </div>
+        </fieldset>
+      </article>
+
+      <article class="autofill">
+        <fieldset class="autofill-block">
+          <legend>Autofill Block</legend>
+          <div id="parent-autofill">
+            <input id="autofill-input" autocomplete="off" />
+            <ul id="autofill-list"></ul>
+          </div>
+        </fieldset>
+      </article>
+
+      <article class="spoiler-article">
+        <fieldset class="spoiler-block">
+          <legend>Autofill Block</legend>
+          <p class="spoiler-container">Lorem ipsum dolor sit amet.</p>
+          <p class="spoiler">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores.</p>
+          <p>Lorem ipsum dolor sit amet.</p>
+          <p class="spoiler-container">Lorem ipsum dolor sit amet.</p>
+          <p class="spoiler">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+          <p>Lorem ipsum dolor sit amet.</p>
+        </fieldset>
+      </article>
+
+      <article class="tabs-article">
+        <fieldset class="tabs-block">
+          <legend>Autofill Block</legend>
+          <div class="tabs-parent">
+            <nav class="tabs-nav">
+              <ul class="tabs-nav-list">
+                <li class="tabs-nav-item active">Tab_1</li>
+                <li class="tabs-nav-item">Tab_2</li>
+                <li class="tabs-nav-item">Tab_3</li>
+              </ul>
+            </nav>
+            <div class="tabs">
+              <div class="tab active">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Excepturi hic quasi et! Rerum dolor reiciendis, obcaecati, eos
+                amet placeat esse provident mollitia vel tempora pariatur ut sit
+                unde possimus suscipit voluptatem nesciunt corporis nemo
+                eveniet, fugit consequatur consectetur nostrum. Molestiae!
+              </div>
+              <div class="tab">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Libero, quos!
+              </div>
+              <div class="tab">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Incidunt et asperiores ut sunt ad? Nihil dignissimos autem
+                officiis atque!
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </article>
+
+      <article class="accordeon-article">
+        <fieldset class="accordeon-block">
+          <legend>Accordeon Block</legend>
+
+          <div class="accordeon-parent">
+            <div class="accordeon-section">
+              <button
+                type="button"
+                class="accordeon-button active"
+                id="accordeon-button-1"
+              >
+                Section 1
+              </button>
+              <div class="accordeon-description">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Tenetur, optio?
+              </div>
+            </div>
+            <div class="accordeon-section">
+              <button
+                type="button"
+                class="accordeon-button active"
+                id="accordeon-button-2"
+              >
+                Section 2
+              </button>
+              <div class="accordeon-description">Lorem ipsum dolor sit.</div>
+            </div>
+            <div class="accordeon-section">
+              <button
+                type="button"
+                class="accordeon-button active"
+                id="accordeon-button-3"
+              >
+                Section 3
+              </button>
+              <div class="accordeon-description">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
+                reiciendis ad facilis.
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </article>
+
+      <article class="cities-article">
+        <fieldset class="cities-block">
+          <legend>Cities Block</legend>
+          <input
+            type="text"
+            id="cities-input"
+            class="cities-input"
+            placeholder="City..."
+          />
+          <p id="cities-output" class="cities-output">Placeholder</p>
+        </fieldset>
+      </article>
+
+      <article class="toDo-article">
+        <fieldset class="toDo-block">
+          <legend>To do List</legend>
+          <input type="text" id="toDo-input" class="toDo-input" placeholder="To do...">
+          <button type="button" class="toDo-button button" id="toDo-button">Add</button>
+          <ul class="toDo-list">
+
+          </ul>
+        </fieldset>
+      </article>
+
+    </main>
+
+    <footer class="footer"></footer>
+  </body>
+</html>
