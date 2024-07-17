@@ -172,4 +172,9 @@ ul.tabs-nav-list {
 	margin-right: 5px;
 	background: no-repeat center/cover url(Images/trash-svgrepo-com.svg);
 }
+
+.toDo-list span.completed {
+	text-decoration: line-through;
+}
+
 /* To do list end */

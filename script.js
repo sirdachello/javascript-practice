@@ -607,6 +607,7 @@ function addListItem() {
 
       toggleDoneButton.addEventListener(`click`, () => {
         toggleDoneButton.classList.toggle(`done`);
+        textToChange.classList.toggle(`completed`);
       })
 
       newListItem.insertAdjacentElement(`afterbegin`, toggleDoneButton);
@@ -627,22 +628,6 @@ function addListItem() {
       // "remove" functionality section end
       toDoList.appendChild(newListItem);  
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
