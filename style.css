@@ -178,3 +178,70 @@ ul.tabs-nav-list {
 }
 
 /* To do list end */
+
+/* calculator */
+
+.calculator-wrapper {
+	width: 90vw;
+	margin: 0 auto;
+}
+
+.calculator-input-list {
+
+	display: flex;
+	gap: 10px;
+
+	list-style: none;
+	padding: 0;
+	justify-content: center;
+
+}
+
+.calculator-input-list input, .calculator-input-list button {
+
+	box-sizing: border-box;
+	width: calc((90vw/4) - 10px);
+	padding: 0;
+} 
+
+.goods-calculator-article th, .goods-calculator-article td {
+	border: 1px solid black;
+	position: relative;
+} 
+
+.calculator-table {
+	width: 90vw;
+	margin: 0 auto;
+}
+
+.calculator-table td:first-child:not(th) {
+	text-align: center;
+}
+.calculator-table td:last-child:not(th) {
+	text-align: center;
+}
+.calculator-table-total {
+	width: 20vw;
+	margin-left: auto;
+}
+
+.calculator-table input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 90%;
+	border: none;
+	background: transparent;
+	text-align: center;
+}
+
+.calculator-table input:active, 
+.calculator-table input:focus {
+outline: none;
+color: whitesmoke;
+}
+
+.activeTD {
+	background-color: rgb(61, 61, 61);
+}
+/* calculator end */

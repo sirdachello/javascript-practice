@@ -629,9 +629,132 @@ function addListItem() {
       toDoList.appendChild(newListItem);  
 }
 
-
-
 // to-Do list sectiond end
+
+// calculator-table section
+
+const entityName = document.getElementById(`entity-name`);
+const entityPrice = document.getElementById(`entity-price`);
+const entityAmount = document.getElementById(`entity-amount`);
+const addEntityButton = document.getElementById(`entity-enter-button`);
+
+
+
+let tableBody = document.querySelector(`.calculator-table-body`);
+let tableTotal = document.querySelector(`.calculator-table-total`);
+
+
+addEntityButton.addEventListener(`click`, addTableEntity);
+
+function addTableEntity() {
+  let inputs = [entityName, entityPrice, entityAmount]
+
+  for (let input of inputs) {
+    if (!input.value) {
+      input.focus();
+      return
+    }
+  }
+
+  let newRow = document.createElement(`tr`);
+
+  let name = entityName.value;
+  let price = entityPrice.value;
+  let amount = entityAmount.value;
+
+  let nameElement = document.createElement(`td`);
+  nameElement.textContent = name;
+  nameElement.addEventListener(`dblclick`, redactElement)
+
+  let priceElement = document.createElement(`td`);
+  priceElement.textContent = price;
+  priceElement.classList.add(`price`);
+  priceElement.addEventListener(`dblclick`, redactElement)
+
+
+  let amountElement = document.createElement(`td`);
+  amountElement.textContent = amount;
+  amountElement.classList.add(`amount`);
+  amountElement.addEventListener(`dblclick`, redactElement)
+  
+  let sumElement = document.createElement(`td`);
+  sumElement.textContent = price * amount;
+  sumElement.classList.add(`sum`);
+  let deleteElement = document.createElement(`td`);
+  deleteElement.textContent = `Delete`;
+  deleteElement.addEventListener(`click`, () => {
+    newRow.remove();
+    updateTotal()
+  })
+
+  newRow.appendChild(nameElement);
+  newRow.appendChild(priceElement);
+  newRow.appendChild(amountElement);
+  newRow.appendChild(sumElement);
+  newRow.appendChild(deleteElement);
+
+  tableBody.appendChild(newRow);
+
+  updateTotal()
+
+  // update total
+  function updateTotal() {
+    let sums = Array.from(tableBody.querySelectorAll(`.sum`))
+    let price = Array.from(tableBody.querySelectorAll(`.price`))
+    let amount = Array.from(tableBody.querySelectorAll(`.amount`))
+    let total = 0;
+
+    for (let i = 0; i < price.length; i++) {
+      sums[i].textContent = price[i].textContent * amount[i].textContent; 
+      total += +sums[i].textContent
+      console.log(sums[i]);
+      console.log(price[i]);
+      console.log(amount[i]);
+      console.log(total);
+    }
+    tableTotal.textContent = `Total: ${total}$`
+  }
+
+  // redacting td
+
+  function redactElement() {
+    
+    this.classList.add(`activeTD`)
+    let self = this;
+    let redactInput = document.createElement(`input`);
+    redactInput.value = this.textContent;
+    this.textContent = ``;
+    this.insertAdjacentElement(`beforeEnd`, redactInput);
+
+    setTimeout(() => {
+      redactInput.focus();
+    }, 100);
+
+    function updateContent() {
+      self.textContent = redactInput.value;
+      redactInput.remove();
+      updateTotal();
+  }
+
+  redactInput.addEventListener(`keypress`, (e) => {
+    if (e.key === `Enter`){
+      
+      self.classList.remove(`activeTD`)
+      updateContent();
+    }
+  }); 
+
+  redactInput.addEventListener(`blur`, () => {
+    
+    self.classList.remove(`activeTD`)
+      updateContent();
+  });
+}
+}
+
+
+
+// calculator-table section end
 
 
 // helper functions
