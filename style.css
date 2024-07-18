@@ -245,3 +245,22 @@ color: whitesmoke;
 	background-color: rgb(61, 61, 61);
 }
 /* calculator end */
+
+.styled-test input {
+	padding: 5px;
+	border-radius: 5px;
+	border: 1px solid black;
+	outline: 1px solid black;
+}
+.styled-test input.right {
+	border: 1px solid green;
+	outline: 1px solid green;
+}
+.styled-test input.wrong {
+	border: 1px solid red;
+	outline: 1px solid red;
+}
+
+.test-tip {
+	font-size: 10px;
+}

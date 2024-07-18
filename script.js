@@ -757,6 +757,150 @@ function addTableEntity() {
 // calculator-table section end
 
 
+// test section
+
+let answers = Array.from(document.querySelectorAll(`.test input`));
+let checkButton = document.getElementById(`check-button`);
+
+
+checkButton.addEventListener(`click`, checkCorrectness)
+
+function checkCorrectness() {
+  for (let i = 0; i < answers.length; i++) {
+    console.log(answersObj[`answer_${i + 1}`]);
+      if(answers[i].value === answersObj[`answer_${i + 1}`]) {
+        answers[i].classList.remove(`wrong`);
+        answers[i].classList.add(`right`);
+      } else {
+        answers[i].classList.remove(`right`);
+        answers[i].classList.add(`wrong`);
+      }
+
+  }
+}
+
+for (let answer of answers) {
+  answer.addEventListener(`keypress`, (e) => {
+    if (e.key === `Enter`) {
+      if((answer.value).toLowerCase() === answer.dataset.answer) {
+        answer.classList.remove(`wrong`);
+        answer.classList.add(`right`);
+        answer.blur();
+      } else {
+        answer.classList.remove(`right`);
+        answer.classList.add(`wrong`);
+        answer.blur();
+      }
+    }
+  })
+}
+
+
+// test section end
+
+// test-created section 
+
+let questionsObj = {
+  question_1: `6 + x = nice`,
+  question_2: `Meaning of the multiverse?`,
+  question_3: `Ass or titties?`,
+  question_4: `Why ass?`,
+  question_5: `Else?`,
+  question_6: `Something?`,
+}
+
+let answersObj = {
+  answer_1: `9`,
+  answer_2: `42`,
+  answer_3: `ass`,
+  answer_4: `because`,
+  answer_5: `else`,
+  answer_6: `something`,
+}
+
+let testCreated = document.querySelector(`.test-created`)
+let checkCreatedButton = document.getElementById(`check-created-button`);
+
+
+// table-creation subsection
+
+for (let i = 1; i <= Object.keys(questionsObj).length; i++) {
+  console.log(questionsObj[`question_${i}`]);
+    let div = document.createElement(`div`);
+    div.classList.add(`question-block`);
+
+    let p = document.createElement(`p`);
+    p.textContent = questionsObj[`question_${i}`];
+
+    let input = document.createElement(`input`);
+    input.setAttribute('id', `question-created-${i}`);
+    input.classList.add(`question-created-${i}`)
+
+
+    input.addEventListener(`keypress`, (e) => {
+      if (e.key === `Enter`) {
+        if((input.value).toLowerCase() === answersObj[`answer_${i}`]) {
+          input.classList.remove(`wrong`);
+          input.classList.add(`right`);
+          input.blur();
+        } else {
+          input.classList.remove(`right`);
+          input.classList.add(`wrong`);
+          input.blur();
+        }
+      }
+    })
+
+
+
+
+    let label = document.createElement(`label`);
+    label.textContent = `Answer: `;
+    label.setAttribute('for', `question-created-${i}`);
+
+
+    div.appendChild(p);
+    div.appendChild(label);
+    div.appendChild(input);
+
+
+
+    testCreated.appendChild(div)
+}
+
+
+checkCreatedButton.addEventListener(`click`, checkCreatedCorrectness)
+let createdInputs = Array.from(document.querySelectorAll(`.test-created-article input`));
+
+function checkCreatedCorrectness() {
+  for (let i = 0; i < Object.keys(questionsObj).length; i++) {
+      if((createdInputs[i].value).toLowerCase() === answersObj[`answer_${i + 1}`]) {
+        createdInputs[i].classList.remove(`wrong`);
+        createdInputs[i].classList.add(`right`);
+      } else {
+        createdInputs[i].classList.remove(`right`);
+        createdInputs[i].classList.add(`wrong`);
+      }
+
+  }
+}
+
+// table-creation subsection end
+
+// test-created section end
+
+
+
+
+
+
+
+
+
+
+
+
+
 // helper functions
 
 function getRandomInt(min, max) {
