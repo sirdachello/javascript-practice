@@ -366,7 +366,7 @@ let accordeonDescriptions = document.querySelectorAll(`.accordeon-description`);
 for (let button of accordeonButtons) {
   button.addEventListener(`click`, () => {
     let targetDescription = button.nextElementSibling;
-    
+
     if (targetDescription.classList.contains(`active`)) {
       targetDescription.classList.toggle(`active`);
     } else {
@@ -383,79 +383,444 @@ for (let button of accordeonButtons) {
 // cities section
 
 const validCities = [
-  "amsterdam", "athens", "barcelona", "belgrade", "berlin", "bern", "bilbao", "birmingham",
-  "bologna", "bordeaux", "bratislava", "bristol", "brussels", "bucharest", "budapest",
-  "cologne", "copenhagen", "dortmund", "dresden", "dublin", "duesseldorf", "edinburgh",
-  "florence", "frankfurt", "geneva", "genoa", "glasgow", "gothenburg", "hamburg", "helsinki",
-  "istanbul", "kiev", "krakow", "leeds", "leipzig", "lisbon", "ljubljana", "lodz", "london",
-  "lyon", "madrid", "manchester", "marseille", "milan", "minsk", "munich", "naples", "nice",
-  "nicosia", "oslo", "paris", "porto", "prague", "reykjavik", "riga", "rome", "rotterdam",
-  "salzburg", "sarajevo", "seville", "sofia", "stockholm", "stuttgart", "tallinn", "tbilisi",
-  "the hague", "tirana", "toulouse", "turin", "valencia", "vienna", "vilnius", "warsaw",
-  "zagreb", "zurich", "alesund", "amersfoort", "antwerp", "bergen", "brno", "cluj-napoca",
-  "cordoba", "cork", "cosenza", "crete", "debrecen", "dusseldorf", "gdansk", "grenoble",
-  "hagen", "hanover", "kaunas", "kosice", "luxembourg", "malaga", "palermo", "pescara",
-  "split", "tampere", "trieste", "wroclaw", "santiago", "los angeles", "new york",
-  "tokyo", "sydney", "cape town", "cairo", "mumbai", "rio de janeiro", "vancouver",
-  "toronto", "singapore", "bangkok", "dubai", "moscow", "kyiv", "shanghai", "beijing",
-  "hong kong", "jakarta", "budapest", "prague", "vienna", "lisbon", "madrid", "barcelona",
-  "berlin", "paris", "rome", "amsterdam", "athens", "istanbul", "warsaw", "bucharest",
-  "brussels", "budapest", "sevastopol", "stockholm", "vienna", "berlin", "copenhagen", "amsterdam",
-  "athens", "lisbon", "helsinki", "oslo", "dublin", "luxembourg", "london", "bern", "berne",
-  "bratislava", "andorra la vella", "sofia", "zagreb", "tallinn", "riga", "vilnius", "san marino",
-  "monte carlo", "monaco", "san francisco", "los angeles", "seattle", "vancouver", "toronto",
-  "mexico city", "buenos aires", "santiago", "lima", "rio de janeiro", "saõ paulo", "bogotá",
-  "quito", "caracas", "brasília", "lisbon", "porto", "madrid", "barcelona", "valencia", "seville",
-  "malaga", "granada", "bilbao", "ibiza", "palma de mallorca", "tenerife", "athens", "thessaloniki",
-  "crete", "rhodes", "mykonos", "santorini", "budapest", "debrecen", "szeged", "miskolc",
-  "székesfehérvár", "szombathely", "szolnok", "győr", "pécs", "szeged", "stockholm", "gothenburg",
-  "malmö", "uppsala", "västerås", "umeå", "linköping", "helsingborg", "borås", "kalmar",
-  "karlstad", "jönköping", "växjö", "norrköping", "lund", "eskilstuna", "halmstad", "luleå",
-  "falun", "gävle", "visby", "kiruna", "umeå", "tromsø", "stavanger", "trondheim", "bergen",
-  "oslo", "oslo", "stavanger", "trondheim", "bergen", "oslo", "bergen", "tromsø", "drammen",
-  "sandnes", "sarpsborg", "skien", "ålesund", "haugesund", "østfold", "kristiansand", "fredrikstad",
-  "sørlandet", "bodø", "molde", "larvik", "tonsberg", "sandefjord", "vestfold", "hamar", "lillehammer",
-  "moss", "kongsberg", "asker", "østlandet", "kristiansund", "alesund", "amersfoort", "antwerp",
-  "bergen", "brno", "cluj-napoca", "cordoba", "cork", "cosenza", "crete", "debrecen", "dusseldorf",
-  "gdansk", "grenoble", "hagen", "hanover", "kaunas", "kosice", "luxembourg", "malaga", "palermo",
-  "pescara", "split", "tampere", "trieste", "wroclaw", "bruges", "ghent", "leuven", "mechelen",
-  "mons", "namur", "liege", "charleroi", "antwerp", "ypres", "knokke-heist", "ostend", "louvain-la-neuve",
-  "bruges", "ghent", "leuven", "mechelen", "mons", "namur", "liege", "charleroi", "antwerp",
-  "ypres", "knokke-heist", "ostend", "louvain-la-neuve", "zurich", "geneva", "basel", "lucerne",
-  "bern", "lausanne", "zermatt", "interlaken", "lugano", "st. moritz", "grindelwald", "davos",
-  "locarno", "appenzell", "thun", "baden", "neuchatel", "aarau", "vevey", "biel", "fribourg",
-  "bellinzona", "schaffhausen", "st. gallen", "winterthur", "solothurn", "zug", "morges", "montreux",
-  "nyon", "sion", "martigny", "baden-baden", "heidelberg", "mannheim", "freiburg", "karlsruhe",
-  "ulm", "stuttgart", "tübingen", "esslingen", "pforzheim", "ravensburg", "friedrichshafen",
-  "konstanz", "ludwigsburg", "reutlingen", "sindelfingen", "offenburg", "villingen-schwenningen",
-  "esslingen am neckar", "wiesbaden", "mainz", "darmstadt", "kassel", "fulda", "giessen",
-  "marburg", "bad homburg", "offenbach", "hanau", "rüsselsheim", "worms", "speyer", "neustadt",
-  "ludwigshafen", "landau", "frankenthal", "bad kreuznach", "ingelheim", "idstein", "limburg",
-  "neuwied", "mayence", "neustadt an der weinstrasse", "frankenthal am main", "ludwigshafen am rhein",
-  "landau in der pfalz", "bad kreuznach am rhein", "ingelheim am rhein", "idstein am rhein",
-  "limburg an der lahn", "neuwied am rhein", "ludwigsburg", "reutlingen", "sindelfingen", "offenburg",
-  "villingen-schwenningen", "esslingen am neckar", "wiesbaden", "mainz", "darmstadt", "kassel",
-  "fulda", "giessen", "marburg", "bad homburg", "offenbach", "hanau", "rüsselsheim", "worms",
-  "speyer", "neustadt", "ludwigshafen", "landau", "frankenthal",]
-
-
+  "amsterdam",
+  "athens",
+  "barcelona",
+  "belgrade",
+  "berlin",
+  "bern",
+  "bilbao",
+  "birmingham",
+  "bologna",
+  "bordeaux",
+  "bratislava",
+  "bristol",
+  "brussels",
+  "bucharest",
+  "budapest",
+  "cologne",
+  "copenhagen",
+  "dortmund",
+  "dresden",
+  "dublin",
+  "duesseldorf",
+  "edinburgh",
+  "florence",
+  "frankfurt",
+  "geneva",
+  "genoa",
+  "glasgow",
+  "gothenburg",
+  "hamburg",
+  "helsinki",
+  "istanbul",
+  "kiev",
+  "krakow",
+  "leeds",
+  "leipzig",
+  "lisbon",
+  "ljubljana",
+  "lodz",
+  "london",
+  "lyon",
+  "madrid",
+  "manchester",
+  "marseille",
+  "milan",
+  "minsk",
+  "munich",
+  "naples",
+  "nice",
+  "nicosia",
+  "oslo",
+  "paris",
+  "porto",
+  "prague",
+  "reykjavik",
+  "riga",
+  "rome",
+  "rotterdam",
+  "salzburg",
+  "sarajevo",
+  "seville",
+  "sofia",
+  "stockholm",
+  "stuttgart",
+  "tallinn",
+  "tbilisi",
+  "the hague",
+  "tirana",
+  "toulouse",
+  "turin",
+  "valencia",
+  "vienna",
+  "vilnius",
+  "warsaw",
+  "zagreb",
+  "zurich",
+  "alesund",
+  "amersfoort",
+  "antwerp",
+  "bergen",
+  "brno",
+  "cluj-napoca",
+  "cordoba",
+  "cork",
+  "cosenza",
+  "crete",
+  "debrecen",
+  "dusseldorf",
+  "gdansk",
+  "grenoble",
+  "hagen",
+  "hanover",
+  "kaunas",
+  "kosice",
+  "luxembourg",
+  "malaga",
+  "palermo",
+  "pescara",
+  "split",
+  "tampere",
+  "trieste",
+  "wroclaw",
+  "santiago",
+  "los angeles",
+  "new york",
+  "tokyo",
+  "sydney",
+  "cape town",
+  "cairo",
+  "mumbai",
+  "rio de janeiro",
+  "vancouver",
+  "toronto",
+  "singapore",
+  "bangkok",
+  "dubai",
+  "moscow",
+  "kyiv",
+  "shanghai",
+  "beijing",
+  "hong kong",
+  "jakarta",
+  "budapest",
+  "prague",
+  "vienna",
+  "lisbon",
+  "madrid",
+  "barcelona",
+  "berlin",
+  "paris",
+  "rome",
+  "amsterdam",
+  "athens",
+  "istanbul",
+  "warsaw",
+  "bucharest",
+  "brussels",
+  "budapest",
+  "sevastopol",
+  "stockholm",
+  "vienna",
+  "berlin",
+  "copenhagen",
+  "amsterdam",
+  "athens",
+  "lisbon",
+  "helsinki",
+  "oslo",
+  "dublin",
+  "luxembourg",
+  "london",
+  "bern",
+  "berne",
+  "bratislava",
+  "andorra la vella",
+  "sofia",
+  "zagreb",
+  "tallinn",
+  "riga",
+  "vilnius",
+  "san marino",
+  "monte carlo",
+  "monaco",
+  "san francisco",
+  "los angeles",
+  "seattle",
+  "vancouver",
+  "toronto",
+  "mexico city",
+  "buenos aires",
+  "santiago",
+  "lima",
+  "rio de janeiro",
+  "saõ paulo",
+  "bogotá",
+  "quito",
+  "caracas",
+  "brasília",
+  "lisbon",
+  "porto",
+  "madrid",
+  "barcelona",
+  "valencia",
+  "seville",
+  "malaga",
+  "granada",
+  "bilbao",
+  "ibiza",
+  "palma de mallorca",
+  "tenerife",
+  "athens",
+  "thessaloniki",
+  "crete",
+  "rhodes",
+  "mykonos",
+  "santorini",
+  "budapest",
+  "debrecen",
+  "szeged",
+  "miskolc",
+  "székesfehérvár",
+  "szombathely",
+  "szolnok",
+  "győr",
+  "pécs",
+  "szeged",
+  "stockholm",
+  "gothenburg",
+  "malmö",
+  "uppsala",
+  "västerås",
+  "umeå",
+  "linköping",
+  "helsingborg",
+  "borås",
+  "kalmar",
+  "karlstad",
+  "jönköping",
+  "växjö",
+  "norrköping",
+  "lund",
+  "eskilstuna",
+  "halmstad",
+  "luleå",
+  "falun",
+  "gävle",
+  "visby",
+  "kiruna",
+  "umeå",
+  "tromsø",
+  "stavanger",
+  "trondheim",
+  "bergen",
+  "oslo",
+  "oslo",
+  "stavanger",
+  "trondheim",
+  "bergen",
+  "oslo",
+  "bergen",
+  "tromsø",
+  "drammen",
+  "sandnes",
+  "sarpsborg",
+  "skien",
+  "ålesund",
+  "haugesund",
+  "østfold",
+  "kristiansand",
+  "fredrikstad",
+  "sørlandet",
+  "bodø",
+  "molde",
+  "larvik",
+  "tonsberg",
+  "sandefjord",
+  "vestfold",
+  "hamar",
+  "lillehammer",
+  "moss",
+  "kongsberg",
+  "asker",
+  "østlandet",
+  "kristiansund",
+  "alesund",
+  "amersfoort",
+  "antwerp",
+  "bergen",
+  "brno",
+  "cluj-napoca",
+  "cordoba",
+  "cork",
+  "cosenza",
+  "crete",
+  "debrecen",
+  "dusseldorf",
+  "gdansk",
+  "grenoble",
+  "hagen",
+  "hanover",
+  "kaunas",
+  "kosice",
+  "luxembourg",
+  "malaga",
+  "palermo",
+  "pescara",
+  "split",
+  "tampere",
+  "trieste",
+  "wroclaw",
+  "bruges",
+  "ghent",
+  "leuven",
+  "mechelen",
+  "mons",
+  "namur",
+  "liege",
+  "charleroi",
+  "antwerp",
+  "ypres",
+  "knokke-heist",
+  "ostend",
+  "louvain-la-neuve",
+  "bruges",
+  "ghent",
+  "leuven",
+  "mechelen",
+  "mons",
+  "namur",
+  "liege",
+  "charleroi",
+  "antwerp",
+  "ypres",
+  "knokke-heist",
+  "ostend",
+  "louvain-la-neuve",
+  "zurich",
+  "geneva",
+  "basel",
+  "lucerne",
+  "bern",
+  "lausanne",
+  "zermatt",
+  "interlaken",
+  "lugano",
+  "st. moritz",
+  "grindelwald",
+  "davos",
+  "locarno",
+  "appenzell",
+  "thun",
+  "baden",
+  "neuchatel",
+  "aarau",
+  "vevey",
+  "biel",
+  "fribourg",
+  "bellinzona",
+  "schaffhausen",
+  "st. gallen",
+  "winterthur",
+  "solothurn",
+  "zug",
+  "morges",
+  "montreux",
+  "nyon",
+  "sion",
+  "martigny",
+  "baden-baden",
+  "heidelberg",
+  "mannheim",
+  "freiburg",
+  "karlsruhe",
+  "ulm",
+  "stuttgart",
+  "tübingen",
+  "esslingen",
+  "pforzheim",
+  "ravensburg",
+  "friedrichshafen",
+  "konstanz",
+  "ludwigsburg",
+  "reutlingen",
+  "sindelfingen",
+  "offenburg",
+  "villingen-schwenningen",
+  "esslingen am neckar",
+  "wiesbaden",
+  "mainz",
+  "darmstadt",
+  "kassel",
+  "fulda",
+  "giessen",
+  "marburg",
+  "bad homburg",
+  "offenbach",
+  "hanau",
+  "rüsselsheim",
+  "worms",
+  "speyer",
+  "neustadt",
+  "ludwigshafen",
+  "landau",
+  "frankenthal",
+  "bad kreuznach",
+  "ingelheim",
+  "idstein",
+  "limburg",
+  "neuwied",
+  "mayence",
+  "neustadt an der weinstrasse",
+  "frankenthal am main",
+  "ludwigshafen am rhein",
+  "landau in der pfalz",
+  "bad kreuznach am rhein",
+  "ingelheim am rhein",
+  "idstein am rhein",
+  "limburg an der lahn",
+  "neuwied am rhein",
+  "ludwigsburg",
+  "reutlingen",
+  "sindelfingen",
+  "offenburg",
+  "villingen-schwenningen",
+  "esslingen am neckar",
+  "wiesbaden",
+  "mainz",
+  "darmstadt",
+  "kassel",
+  "fulda",
+  "giessen",
+  "marburg",
+  "bad homburg",
+  "offenbach",
+  "hanau",
+  "rüsselsheim",
+  "worms",
+  "speyer",
+  "neustadt",
+  "ludwigshafen",
+  "landau",
+  "frankenthal",
+];
 
 let citiesInput = document.getElementById(`cities-input`);
 let citiesOutput = document.getElementById(`cities-output`);
 
 let usedCities = [];
 
-;(function provideFirstWord() {
-  usedCities.push(validCities[Math.floor(Math.random() * validCities.length)])
+(function provideFirstWord() {
+  usedCities.push(validCities[Math.floor(Math.random() * validCities.length)]);
   citiesOutput.textContent = `The first city is "${usedCities[0]}"`;
 })();
 
 // IIFE instantly initialized function expression
 
+citiesInput.addEventListener(`change`, citiesGame);
 
-citiesInput.addEventListener(`change`, citiesGame)
-
-async function citiesGame(){
+async function citiesGame() {
   citiesOutput.textContent = ``;
 
   let lastCityUsed;
@@ -465,37 +830,39 @@ async function citiesGame(){
 
   if (isInUsedCities(playerInput)) {
     citiesOutput.textContent = `Sorry, the city has already been used, try a new one!`;
-    return
+    return;
   }
   if (!isInValidCities(playerInput)) {
     citiesOutput.textContent = `No such city is known, please, check the spelling or try a new city!`;
-    return
+    return;
   }
   if (!firstLetterMatchesRight(playerInput)) {
-    lastCityUsed = usedCities[usedCities.length-1];
-    lastLetterToMatch = lastCityUsed[lastCityUsed.length-1]
+    lastCityUsed = usedCities[usedCities.length - 1];
+    lastLetterToMatch = lastCityUsed[lastCityUsed.length - 1];
     citiesOutput.textContent = `The first letter has to be "${lastLetterToMatch.toUpperCase()}"`;
-    return
+    return;
   }
 
   addToUsedCities(playerInput);
   console.log(`used cities: ${usedCities}`);
-  lastCityUsed = usedCities[usedCities.length-1];
-  lastLetterToMatch = lastCityUsed[lastCityUsed.length-1]
+  lastCityUsed = usedCities[usedCities.length - 1];
+  lastLetterToMatch = lastCityUsed[lastCityUsed.length - 1];
   citiesOutput.textContent = `Good job, now the last letter is "${lastLetterToMatch.toUpperCase()}"`;
-
-  
 
   async function generateNextCity() {
     citiesOutput.textContent = `Nice guess! I am thinking of another city...`;
     setTimeout(() => {
-      let nextCity = validCities.filter(city => {
+      let nextCity = validCities.filter((city) => {
         let cityFirstLetter = city[0];
-        let lastCityUsed = usedCities[usedCities.length-1];
-        let lastLetterToMatch = lastCityUsed[lastCityUsed.length-1];
-        return !isInUsedCities(city) && isInValidCities(city) && cityFirstLetter === lastLetterToMatch
+        let lastCityUsed = usedCities[usedCities.length - 1];
+        let lastLetterToMatch = lastCityUsed[lastCityUsed.length - 1];
+        return (
+          !isInUsedCities(city) &&
+          isInValidCities(city) &&
+          cityFirstLetter === lastLetterToMatch
+        );
       })[0];
-      
+
       if (nextCity) {
         addToUsedCities(nextCity);
         console.log(`used cities: ${usedCities}`);
@@ -503,24 +870,19 @@ async function citiesGame(){
       } else {
         citiesOutput.textContent = `Sorry, I could not generate a new word, please, try again`;
       }
-      
     }, 2000);
-
   }
 
   await generateNextCity();
-
-  
-  
 }
 
 // cities helper functions
-function isInValidCities(input){
-  return validCities.some(elem => elem === input);
+function isInValidCities(input) {
+  return validCities.some((elem) => elem === input);
 }
 
 function isInUsedCities(input) {
-  return usedCities.some(elem => elem === input);
+  return usedCities.some((elem) => elem === input);
 }
 
 function addToUsedCities(input) {
@@ -528,15 +890,14 @@ function addToUsedCities(input) {
 }
 
 function firstLetterMatchesRight(input) {
-  let inputFirstLetter = input[0]
-  let lastCityUsed = usedCities[usedCities.length-1];
-  let lastLetterToMatch = lastCityUsed[lastCityUsed.length-1]
+  let inputFirstLetter = input[0];
+  let lastCityUsed = usedCities[usedCities.length - 1];
+  let lastLetterToMatch = lastCityUsed[lastCityUsed.length - 1];
   return inputFirstLetter === lastLetterToMatch;
 }
 // cities helper functions end
 
 // cities section end
-
 
 // to-Do list sectiond
 
@@ -544,21 +905,19 @@ const toDoInput = document.getElementById(`toDo-input`);
 const toDoButtonAdd = document.getElementById(`toDo-button`);
 const toDoList = document.querySelector(`.toDo-list`);
 
-
 toDoInput.addEventListener(`keypress`, (e) => {
-  if (e.key === "Enter"){
+  if (e.key === "Enter") {
     addListItem();
   }
-})
+});
 
-toDoButtonAdd.addEventListener(`click`, addListItem)
+toDoButtonAdd.addEventListener(`click`, addListItem);
 
 function addListItem() {
   if (!toDoInput.value) {
-    return
+    return;
   }
   let newListItem = document.createElement(`li`);
-
 
   // text-change functionality section
   let textToChange = document.createElement(`span`);
@@ -577,8 +936,8 @@ function addListItem() {
       textToChangeInput.focus();
     }, 150);
 
-    textToChangeInput.addEventListener(`change`, handleChange)
-    textToChangeInput.addEventListener(`blur`, handleChange)
+    textToChangeInput.addEventListener(`change`, handleChange);
+    textToChangeInput.addEventListener(`blur`, handleChange);
 
     function handleChange() {
       if (!textToChangeInput.value) {
@@ -590,43 +949,38 @@ function addListItem() {
       textToChange.addEventListener(`dblclick`, changeContent);
     }
 
-    newListItem.insertAdjacentElement(`beforeEnd`, textToChangeInput)
+    newListItem.insertAdjacentElement(`beforeEnd`, textToChangeInput);
+  });
 
+  // text-change functionality section end
 
+  // "done" functionality section
 
-  })
+  let toggleDoneButton = document.createElement(`button`);
+  toggleDoneButton.classList.add(`toggleDoneButton`);
 
-      // text-change functionality section end
+  toggleDoneButton.addEventListener(`click`, () => {
+    toggleDoneButton.classList.toggle(`done`);
+    textToChange.classList.toggle(`completed`);
+  });
 
+  newListItem.insertAdjacentElement(`afterbegin`, toggleDoneButton);
 
+  // "done" functionality section end
 
-      // "done" functionality section
+  // "remove" functionality section
 
-      let toggleDoneButton = document.createElement(`button`);
-      toggleDoneButton.classList.add(`toggleDoneButton`);
+  let removeButton = document.createElement(`button`);
+  removeButton.classList.add(`toDo-removeButton`);
 
-      toggleDoneButton.addEventListener(`click`, () => {
-        toggleDoneButton.classList.toggle(`done`);
-        textToChange.classList.toggle(`completed`);
-      })
+  removeButton.addEventListener(`click`, () => {
+    newListItem.remove();
+  });
 
-      newListItem.insertAdjacentElement(`afterbegin`, toggleDoneButton);
+  newListItem.insertAdjacentElement(`afterbegin`, removeButton);
 
-      // "done" functionality section end
-
-      // "remove" functionality section
-
-      let removeButton = document.createElement(`button`);
-      removeButton.classList.add(`toDo-removeButton`);
-
-      removeButton.addEventListener(`click`, () => {
-        newListItem.remove();
-      })
-
-      newListItem.insertAdjacentElement(`afterbegin`, removeButton);
-
-      // "remove" functionality section end
-      toDoList.appendChild(newListItem);  
+  // "remove" functionality section end
+  toDoList.appendChild(newListItem);
 }
 
 // to-Do list sectiond end
@@ -638,21 +992,18 @@ const entityPrice = document.getElementById(`entity-price`);
 const entityAmount = document.getElementById(`entity-amount`);
 const addEntityButton = document.getElementById(`entity-enter-button`);
 
-
-
 let tableBody = document.querySelector(`.calculator-table-body`);
 let tableTotal = document.querySelector(`.calculator-table-total`);
-
 
 addEntityButton.addEventListener(`click`, addTableEntity);
 
 function addTableEntity() {
-  let inputs = [entityName, entityPrice, entityAmount]
+  let inputs = [entityName, entityPrice, entityAmount];
 
   for (let input of inputs) {
     if (!input.value) {
       input.focus();
-      return
+      return;
     }
   }
 
@@ -664,19 +1015,18 @@ function addTableEntity() {
 
   let nameElement = document.createElement(`td`);
   nameElement.textContent = name;
-  nameElement.addEventListener(`dblclick`, redactElement)
+  nameElement.addEventListener(`dblclick`, redactElement);
 
   let priceElement = document.createElement(`td`);
   priceElement.textContent = price;
   priceElement.classList.add(`price`);
-  priceElement.addEventListener(`dblclick`, redactElement)
-
+  priceElement.addEventListener(`dblclick`, redactElement);
 
   let amountElement = document.createElement(`td`);
   amountElement.textContent = amount;
   amountElement.classList.add(`amount`);
-  amountElement.addEventListener(`dblclick`, redactElement)
-  
+  amountElement.addEventListener(`dblclick`, redactElement);
+
   let sumElement = document.createElement(`td`);
   sumElement.textContent = price * amount;
   sumElement.classList.add(`sum`);
@@ -684,8 +1034,8 @@ function addTableEntity() {
   deleteElement.textContent = `Delete`;
   deleteElement.addEventListener(`click`, () => {
     newRow.remove();
-    updateTotal()
-  })
+    updateTotal();
+  });
 
   newRow.appendChild(nameElement);
   newRow.appendChild(priceElement);
@@ -695,31 +1045,30 @@ function addTableEntity() {
 
   tableBody.appendChild(newRow);
 
-  updateTotal()
+  updateTotal();
 
   // update total
   function updateTotal() {
-    let sums = Array.from(tableBody.querySelectorAll(`.sum`))
-    let price = Array.from(tableBody.querySelectorAll(`.price`))
-    let amount = Array.from(tableBody.querySelectorAll(`.amount`))
+    let sums = Array.from(tableBody.querySelectorAll(`.sum`));
+    let price = Array.from(tableBody.querySelectorAll(`.price`));
+    let amount = Array.from(tableBody.querySelectorAll(`.amount`));
     let total = 0;
 
     for (let i = 0; i < price.length; i++) {
-      sums[i].textContent = price[i].textContent * amount[i].textContent; 
-      total += +sums[i].textContent
+      sums[i].textContent = price[i].textContent * amount[i].textContent;
+      total += +sums[i].textContent;
       console.log(sums[i]);
       console.log(price[i]);
       console.log(amount[i]);
       console.log(total);
     }
-    tableTotal.textContent = `Total: ${total}$`
+    tableTotal.textContent = `Total: ${total}$`;
   }
 
   // redacting td
 
   function redactElement() {
-    
-    this.classList.add(`activeTD`)
+    this.classList.add(`activeTD`);
     let self = this;
     let redactInput = document.createElement(`input`);
     redactInput.value = this.textContent;
@@ -734,55 +1083,48 @@ function addTableEntity() {
       self.textContent = redactInput.value;
       redactInput.remove();
       updateTotal();
-  }
-
-  redactInput.addEventListener(`keypress`, (e) => {
-    if (e.key === `Enter`){
-      
-      self.classList.remove(`activeTD`)
-      updateContent();
     }
-  }); 
 
-  redactInput.addEventListener(`blur`, () => {
-    
-    self.classList.remove(`activeTD`)
+    redactInput.addEventListener(`keypress`, (e) => {
+      if (e.key === `Enter`) {
+        self.classList.remove(`activeTD`);
+        updateContent();
+      }
+    });
+
+    redactInput.addEventListener(`blur`, () => {
+      self.classList.remove(`activeTD`);
       updateContent();
-  });
+    });
+  }
 }
-}
-
-
 
 // calculator-table section end
-
 
 // test section
 
 let answers = Array.from(document.querySelectorAll(`.test input`));
 let checkButton = document.getElementById(`check-button`);
 
-
-checkButton.addEventListener(`click`, checkCorrectness)
+checkButton.addEventListener(`click`, checkCorrectness);
 
 function checkCorrectness() {
   for (let i = 0; i < answers.length; i++) {
     console.log(answersObj[`answer_${i + 1}`]);
-      if(answers[i].value === answersObj[`answer_${i + 1}`]) {
-        answers[i].classList.remove(`wrong`);
-        answers[i].classList.add(`right`);
-      } else {
-        answers[i].classList.remove(`right`);
-        answers[i].classList.add(`wrong`);
-      }
-
+    if (answers[i].value === answersObj[`answer_${i + 1}`]) {
+      answers[i].classList.remove(`wrong`);
+      answers[i].classList.add(`right`);
+    } else {
+      answers[i].classList.remove(`right`);
+      answers[i].classList.add(`wrong`);
+    }
   }
 }
 
 for (let answer of answers) {
   answer.addEventListener(`keypress`, (e) => {
     if (e.key === `Enter`) {
-      if((answer.value).toLowerCase() === answer.dataset.answer) {
+      if (answer.value.toLowerCase() === answer.dataset.answer) {
         answer.classList.remove(`wrong`);
         answer.classList.add(`right`);
         answer.blur();
@@ -792,13 +1134,12 @@ for (let answer of answers) {
         answer.blur();
       }
     }
-  })
+  });
 }
-
 
 // test section end
 
-// test-created section 
+// test-created section
 
 let questionsObj = {
   question_1: `6 + x = nice`,
@@ -807,7 +1148,7 @@ let questionsObj = {
   question_4: `Why ass?`,
   question_5: `Else?`,
   question_6: `Something?`,
-}
+};
 
 let answersObj = {
   answer_1: `9`,
@@ -816,78 +1157,71 @@ let answersObj = {
   answer_4: `because`,
   answer_5: `else`,
   answer_6: `something`,
-}
+};
 
-let testCreated = document.querySelector(`.test-created`)
+let testCreated = document.querySelector(`.test-created`);
 let checkCreatedButton = document.getElementById(`check-created-button`);
-
 
 // table-creation subsection
 
 for (let i = 1; i <= Object.keys(questionsObj).length; i++) {
-    let div = document.createElement(`div`);
-    div.classList.add(`question-block`);
+  let div = document.createElement(`div`);
+  div.classList.add(`question-block`);
 
-    let p = document.createElement(`p`);
-    p.textContent = questionsObj[`question_${i}`];
+  let p = document.createElement(`p`);
+  p.textContent = questionsObj[`question_${i}`];
 
-    let input = document.createElement(`input`);
-    input.setAttribute('id', `question-created-${i}`);
-    input.classList.add(`question-created-${i}`)
+  let input = document.createElement(`input`);
+  input.setAttribute("id", `question-created-${i}`);
+  input.classList.add(`question-created-${i}`);
 
-
-    input.addEventListener(`keypress`, (e) => {
-      if (e.key === `Enter`) {
-        if((input.value).toLowerCase() === answersObj[`answer_${i}`]) {
-          input.classList.remove(`wrong`);
-          input.classList.add(`right`);
-          input.blur();
-        } else {
-          input.classList.remove(`right`);
-          input.classList.add(`wrong`);
-          input.blur();
-        }
+  input.addEventListener(`keypress`, (e) => {
+    if (e.key === `Enter`) {
+      if (input.value.toLowerCase() === answersObj[`answer_${i}`]) {
+        input.classList.remove(`wrong`);
+        input.classList.add(`right`);
+        input.blur();
+      } else {
+        input.classList.remove(`right`);
+        input.classList.add(`wrong`);
+        input.blur();
       }
-    })
+    }
+  });
 
+  let label = document.createElement(`label`);
+  label.textContent = `Answer: `;
+  label.setAttribute("for", `question-created-${i}`);
 
+  div.appendChild(p);
+  div.appendChild(label);
+  div.appendChild(input);
 
-
-    let label = document.createElement(`label`);
-    label.textContent = `Answer: `;
-    label.setAttribute('for', `question-created-${i}`);
-
-
-    div.appendChild(p);
-    div.appendChild(label);
-    div.appendChild(input);
-
-
-
-    testCreated.appendChild(div)
+  testCreated.appendChild(div);
 }
 
-
-checkCreatedButton.addEventListener(`click`, checkCreatedCorrectness)
-let createdInputs = Array.from(document.querySelectorAll(`.test-created-article input`));
+checkCreatedButton.addEventListener(`click`, checkCreatedCorrectness);
+let createdInputs = Array.from(
+  document.querySelectorAll(`.test-created-article input`)
+);
 
 function checkCreatedCorrectness() {
   for (let i = 0; i < Object.keys(questionsObj).length; i++) {
-      if((createdInputs[i].value).toLowerCase() === answersObj[`answer_${i + 1}`]) {
-        createdInputs[i].classList.remove(`wrong`);
-        createdInputs[i].classList.add(`right`);
-      } else {
-        createdInputs[i].classList.remove(`right`);
-        createdInputs[i].classList.add(`wrong`);
-      }
-
+    if (
+      createdInputs[i].value.toLowerCase() === answersObj[`answer_${i + 1}`]
+    ) {
+      createdInputs[i].classList.remove(`wrong`);
+      createdInputs[i].classList.add(`right`);
+    } else {
+      createdInputs[i].classList.remove(`right`);
+      createdInputs[i].classList.add(`wrong`);
+    }
   }
 }
 
 // table-creation subsection end
 
 // test-created section end
-
 
 // radio-test section
 
@@ -896,44 +1230,41 @@ const radioTestBlock = document.querySelector(`.radio-test-block`);
 
 const radioQuestions = [
   {
-    question: '12 + 15 = x',
+    question: "12 + 15 = x",
     wrong: [20, 25],
     correct: 27,
   },
   {
-    question: '18 / 2 = x',
+    question: "18 / 2 = x",
     wrong: [7, 10],
     correct: 9,
   },
   {
-    question: '5 * 7 = x',
+    question: "5 * 7 = x",
     wrong: [30, 45],
     correct: 35,
   },
   {
-    question: '144 / 12 = x',
+    question: "144 / 12 = x",
     wrong: [10, 15],
     correct: 12,
   },
   {
-    question: '25 - 17 = x',
+    question: "25 - 17 = x",
     wrong: [5, 9],
     correct: 8,
   },
   {
-    question: '8^2 = x',
-    wrong: [64, 49],
+    question: "8^2 = x",
+    wrong: [63, 49],
     correct: 64,
   },
   {
-    question: '√81 = x',
+    question: "√81 = x",
     wrong: [7, 10],
     correct: 9,
   },
 ];
-
-
-
 
 function createRadioTest() {
   let allInputPairs = [];
@@ -942,13 +1273,12 @@ function createRadioTest() {
     // question block for each questinon
     let div = document.createElement(`div`);
     div.classList.add(`radio-question`);
-    
+
     // question for each question block
     let p = document.createElement(`p`);
     p.classList.add(`question-${counter}`);
     p.textContent = elem.question;
     div.appendChild(p);
-
 
     // wrong answers for each question
     elem.wrong.forEach((wrongAnswer) => {
@@ -966,9 +1296,9 @@ function createRadioTest() {
       pair.push(input);
 
       allInputPairs.push(pair);
-    })
+    });
 
-    // correct answer for each question
+    // correct answer for each question [ -, -, +]
     let pair = [];
 
     let label = document.createElement(`label`);
@@ -984,21 +1314,19 @@ function createRadioTest() {
     pair.push(input);
     allInputPairs.push(pair);
 
-
     let shuffledAllInputPairs = shuffle(allInputPairs);
     shuffledAllInputPairs.forEach((pair) => {
       p.insertAdjacentElement(`afterEnd`, pair[0]);
       p.insertAdjacentElement(`afterEnd`, pair[1]);
-    })
+    });
 
-    
     radioTestBlock.appendChild(div);
     counter++;
     allInputPairs = [];
-  })
+  });
 }
 
-createRadioTest()
+createRadioTest();
 
 let radioButton = document.createElement(`button`);
 radioButton.id = `radio-test-button`;
@@ -1006,27 +1334,163 @@ radioButton.textContent = `Check Answers`;
 radioTestBlock.appendChild(radioButton);
 
 radioButton.addEventListener(`click`, (e) => {
-  let questionBlocks = document.querySelectorAll(`.radio-test-block .radio-question`);
+  let questionBlocks = document.querySelectorAll(
+    `.radio-test-block .radio-question`
+  );
   for (let block of questionBlocks) {
     let inputs = block.querySelectorAll(`input[name]`);
-    let correctInput = Array.from(inputs).find(input => input.checked && input.hasAttribute(`data-right`));
+    let correctInput = Array.from(inputs).find(
+      (input) => input.checked && input.hasAttribute(`data-right`)
+    );
     if (correctInput) {
       block.style.border = `2px solid green`;
     } else {
       block.style.border = `2px solid red`;
     }
   }
-})
+});
 // radio-test section end
 
+// slider sectiond
 
+const slider = document.getElementById(`slider`);
+const sliderImage = document.getElementById(`slider-image`);
+const prevSliderButton = document.getElementById(`slider-button-prev`);
+const nextSliderButton = document.getElementById(`slider-button-next`);
 
+const sliderText = [
+  `Learn Javascript`,
+  `Master CSS`,
+  `Tackle HTML`,
+  `Understand Algorithms`,
+];
 
+const sliderPictures = [
+  `https://picsum.photos/200/75`,
+  `https://picsum.photos/200/76`,
+  `https://picsum.photos/200/74`,
+  `https://picsum.photos/200/77`,
+];
 
+let currentIndex = 0;
+nextSliderButton.addEventListener(`click`, () => {
+  // if (currentIndex === 3) {
+  //   return
+  // }
+  currentIndex = (currentIndex + 1) % sliderText.length;
+  slider.textContent = sliderText[currentIndex];
+  sliderImage.src = sliderPictures[currentIndex];
+  console.log(currentIndex);
+});
+prevSliderButton.addEventListener(`click`, () => {
+  // if (currentIndex === 0) {
+  //   return
+  // }
+  currentIndex = (currentIndex - 1 + sliderText.length) % sliderText.length;
+  slider.textContent = sliderText[currentIndex];
+  sliderImage.src = sliderPictures[currentIndex];
+  console.log(currentIndex);
+});
+(function sliderImageRotation() {
+  let i = 0;
+  setInterval(() => {
+    sliderImage.src = sliderPictures[i];
+    i = (i + 1) % sliderPictures.length;
+  }, 2000);
+})();
 
+// slider sectiond end
 
+// second-slider section
 
+const secondSliderImages = document.querySelectorAll(`.second-slider img`);
 
+const secondSlider = setInterval(changeSecondSliderImage, 1500);
+
+let secondSliderIterator = 0;
+function changeSecondSliderImage() {
+  secondSliderImages.forEach((elem) => elem.classList.remove(`visible`));
+  secondSliderIterator = (secondSliderIterator + 1) % secondSliderImages.length;
+  secondSliderImages[secondSliderIterator].classList.add(`visible`);
+}
+
+// second-slider section end
+
+// tic-tac-toe section
+
+let gameField = document.getElementById(`ttt-table`);
+let gameCells = gameField.querySelectorAll(`td`);
+
+gameCells.forEach((cell) => {
+  cell.addEventListener(`click`, markCell);
+});
+
+let player = 0;
+function markCell() {
+  if (this.textContent === ``) {
+    this.textContent = ["X", "O"][player % 2];
+    console.log(this.textContent);
+    this.classList.add(`marked${["X", "O"][player % 2]}`);
+    checkWin();
+    player++;
+  }
+}
+
+let tttWinConditions = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+];
+
+function checkWin() {
+  for (let condition of tttWinConditions) {
+    if (
+      gameCells[condition[0]].textContent !== `` &&
+      gameCells[condition[1]].textContent !== `` &&
+      gameCells[condition[2]].textContent !== `` &&
+      gameCells[condition[0]].textContent === gameCells[condition[1]].textContent &&
+      gameCells[condition[0]].textContent === gameCells[condition[2]].textContent
+    ) {
+      gameCells[condition[0]].style.borderRadius = `20px`;
+      gameCells[condition[1]].style.borderRadius = `20px`;
+      gameCells[condition[2]].style.borderRadius = `20px`;
+      gameCells[condition[0]].style.border = `5px solid green`;
+      gameCells[condition[1]].style.border = `5px solid green`;
+      gameCells[condition[2]].style.border = `5px solid green`;
+      gameCells.forEach((cell) => {
+        cell.removeEventListener(`click`, markCell);
+      });
+      break;
+    } else if (player === 8) {
+      gameCells.forEach((cell) => {
+        cell.removeEventListener(`click`, markCell);
+        cell.style.borderRadius = `5px`;
+        cell.style.border = `10px solid red`;
+      });
+      break
+    }
+  }
+}
+
+let tttResetButton = document.getElementById(`ttt-reset-button`);
+
+tttResetButton.addEventListener(`click`, () => {
+  gameCells.forEach((cell) => {
+    cell.textContent = ``;
+    cell.classList.remove(`markedO`, `markedX`);
+    cell.style.borderRadius = `0`;
+    cell.style.border = `1px solid black`;
+    player = 0;
+    cell.addEventListener(`click`, markCell);
+  });
+});
+
+// tic-tac-toe section end
 
 // helper functions
 
@@ -1034,13 +1498,10 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-
 function shuffle(array) {
-  for (let i = array.length-1; i >= 0; i--) {
+  for (let i = array.length - 1; i >= 0; i--) {
     const random = Math.floor(Math.random() * (i + 1));
     [array[i], array[random]] = [array[random], array[i]];
   }
   return array;
 }
-
-
