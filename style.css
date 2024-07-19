@@ -264,3 +264,12 @@ color: whitesmoke;
 .test-tip {
 	font-size: 10px;
 }
+
+/* radio-test section */
+
+.radio-question {
+	padding: 10px;
+}
+.radio-question label {
+ margin-right: 10px;
+}

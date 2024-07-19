@@ -825,7 +825,6 @@ let checkCreatedButton = document.getElementById(`check-created-button`);
 // table-creation subsection
 
 for (let i = 1; i <= Object.keys(questionsObj).length; i++) {
-  console.log(questionsObj[`question_${i}`]);
     let div = document.createElement(`div`);
     div.classList.add(`question-block`);
 
@@ -890,7 +889,135 @@ function checkCreatedCorrectness() {
 // test-created section end
 
 
+// radio-test section
 
+const question1inputs = document.querySelectorAll(`input[name="question-1"]`);
+const radioTestBlock = document.querySelector(`.radio-test-block`);
+
+const radioQuestions = [
+  {
+    question: '12 + 15 = x',
+    wrong: [20, 25],
+    correct: 27,
+  },
+  {
+    question: '18 / 2 = x',
+    wrong: [7, 10],
+    correct: 9,
+  },
+  {
+    question: '5 * 7 = x',
+    wrong: [30, 45],
+    correct: 35,
+  },
+  {
+    question: '144 / 12 = x',
+    wrong: [10, 15],
+    correct: 12,
+  },
+  {
+    question: '25 - 17 = x',
+    wrong: [5, 9],
+    correct: 8,
+  },
+  {
+    question: '8^2 = x',
+    wrong: [64, 49],
+    correct: 64,
+  },
+  {
+    question: '√81 = x',
+    wrong: [7, 10],
+    correct: 9,
+  },
+];
+
+
+
+
+function createRadioTest() {
+  let allInputPairs = [];
+  let counter = 1;
+  radioQuestions.forEach((elem) => {
+    // question block for each questinon
+    let div = document.createElement(`div`);
+    div.classList.add(`radio-question`);
+    
+    // question for each question block
+    let p = document.createElement(`p`);
+    p.classList.add(`question-${counter}`);
+    p.textContent = elem.question;
+    div.appendChild(p);
+
+
+    // wrong answers for each question
+    elem.wrong.forEach((wrongAnswer) => {
+      let pair = [];
+
+      let label = document.createElement(`label`);
+      label.setAttribute(`for`, `question-${counter}`);
+      label.textContent = wrongAnswer;
+
+      let input = document.createElement(`input`);
+      input.setAttribute(`type`, `radio`);
+      input.setAttribute(`name`, `question-${counter}`);
+
+      pair.push(label);
+      pair.push(input);
+
+      allInputPairs.push(pair);
+    })
+
+    // correct answer for each question
+    let pair = [];
+
+    let label = document.createElement(`label`);
+    label.setAttribute(`for`, `question-${counter}`);
+    label.textContent = elem.correct;
+
+    let input = document.createElement(`input`);
+    input.setAttribute(`type`, `radio`);
+    input.setAttribute(`name`, `question-${counter}`);
+    input.setAttribute(`data-right`, `true`);
+
+    pair.push(label);
+    pair.push(input);
+    allInputPairs.push(pair);
+
+
+    let shuffledAllInputPairs = shuffle(allInputPairs);
+    shuffledAllInputPairs.forEach((pair) => {
+      p.insertAdjacentElement(`afterEnd`, pair[0]);
+      p.insertAdjacentElement(`afterEnd`, pair[1]);
+    })
+
+    
+    radioTestBlock.appendChild(div);
+    counter++;
+    allInputPairs = [];
+  })
+}
+
+createRadioTest()
+
+let radioButton = document.createElement(`button`);
+radioButton.id = `radio-test-button`;
+radioButton.textContent = `Check Answers`;
+radioTestBlock.appendChild(radioButton);
+
+radioButton.addEventListener(`click`, (e) => {
+  let questionBlocks = document.querySelectorAll(`.radio-test-block .radio-question`);
+  for (let block of questionBlocks) {
+    let inputs = block.querySelectorAll(`input[name]`);
+    let correctInput = Array.from(inputs).find(input => input.checked && input.hasAttribute(`data-right`));
+    if (correctInput) {
+      block.style.border = `2px solid green`;
+    } else {
+      block.style.border = `2px solid red`;
+    }
+  }
+})
+// radio-test section end
 
 
 
@@ -906,3 +1033,14 @@ function checkCreatedCorrectness() {
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+
+function shuffle(array) {
+  for (let i = array.length-1; i >= 0; i--) {
+    const random = Math.floor(Math.random() * (i + 1));
+    [array[i], array[random]] = [array[random], array[i]];
+  }
+  return array;
+}
+
+
