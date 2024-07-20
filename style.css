@@ -332,3 +332,56 @@ color: whitesmoke;
 	width: 50px;
 	margin: 10px auto 0 auto;
 }
+
+/* changing colors */
+
+.changing-colors-table {
+	width: 150px;
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.changing-colors-table td {
+	box-sizing: border-box;
+
+	width: 50px;
+	height: 50px;
+
+	border: 1px solid black;
+	border-radius: 20px;
+
+	text-align: center;
+	font-weight: bold;
+}
+
+.cell_red {
+	background: red;
+}
+.cell_green {
+	background: green;
+}
+.cell_blue {
+	background: blue;
+}
+
+.changing-table-steps {
+	text-align: center;
+	margin-block: 10px;
+}
+
+/* calendar */
+
+.calendar-parent {
+	text-align: center;
+}
+
+.calendar {
+	display: inline-block;
+}
+
+.calendar td, .calendar th {
+	padding: 5px 12px;
+	border: 1px solid black;
+	text-align: center;
+}

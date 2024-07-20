@@ -1436,7 +1436,7 @@ function markCell() {
   }
 }
 
-let tttWinConditions = [
+let tttWinConditions = [ 
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -1453,8 +1453,10 @@ function checkWin() {
       gameCells[condition[0]].textContent !== `` &&
       gameCells[condition[1]].textContent !== `` &&
       gameCells[condition[2]].textContent !== `` &&
-      gameCells[condition[0]].textContent === gameCells[condition[1]].textContent &&
-      gameCells[condition[0]].textContent === gameCells[condition[2]].textContent
+      gameCells[condition[0]].textContent ===
+        gameCells[condition[1]].textContent &&
+      gameCells[condition[0]].textContent ===
+        gameCells[condition[2]].textContent
     ) {
       gameCells[condition[0]].style.borderRadius = `20px`;
       gameCells[condition[1]].style.borderRadius = `20px`;
@@ -1472,7 +1474,7 @@ function checkWin() {
         cell.style.borderRadius = `5px`;
         cell.style.border = `10px solid red`;
       });
-      break
+      break;
     }
   }
 }
@@ -1492,6 +1494,178 @@ tttResetButton.addEventListener(`click`, () => {
 
 // tic-tac-toe section end
 
+// changing colors section
+
+let changingTable = document.querySelector(`.changing-colors-table`);
+let changingTableRows = 3;
+let changingTableCols = 3;
+let changingTableColors = [`cell_red`, `cell_green`, `cell_blue`];
+let changingTableSteps = 0;
+let stepsShowcase = document.querySelector(`.changing-table-steps`);
+
+function createChangingTable(rows, cols) {
+  for (let i = 0; i < rows; i++) {
+    let tr = document.createElement(`tr`);
+    tr.classList.add(`changing-table-row`);
+    for (let i = 0; i < cols; i++) {
+      let td = document.createElement(`td`);
+      td.classList.add(`changing-table-cell`);
+      manageColorClass(td);
+      tr.appendChild(td);
+    }
+    changingTable.appendChild(tr);
+  }
+}
+
+createChangingTable(changingTableRows, changingTableCols);
+
+function manageColorClass(elem) {
+  let self = this;
+  let currentClass = Math.floor(Math.random() * changingTableColors.length);
+  elem.classList.add(changingTableColors[currentClass]);
+
+  elem.addEventListener(`click`, function manageClicks() {
+    changingTableSteps++;
+    stepsShowcase.textContent = changingTableSteps;
+    elem.classList.remove(changingTableColors[currentClass]);
+    currentClass = (currentClass + 1) % changingTableColors.length;
+    elem.classList.add(changingTableColors[currentClass]);
+    if (isWinState()) {
+      let elems = document.querySelectorAll(`.changing-table-cell`);
+      elems.forEach((cell) => {
+        cell.removeEventListener(`click`, manageClicks);
+      });
+      stepsShowcase.textContent = `Good job, you won in ${changingTableSteps} steps!`;
+      changingTableSteps = 0;
+    }
+  });
+}
+
+function isWinState() {
+  let tds = changingTable.querySelectorAll(`td`);
+  let classesArray = [];
+  for (let td of tds) {
+    let filteredClasses = Array.from(td.classList).filter((className) =>
+      className.startsWith("cell")
+    );
+    classesArray.push(filteredClasses);
+  }
+  let firstElement = classesArray.flat()[0];
+  return classesArray.flat().every((elem) => elem === firstElement);
+}
+
+// changing colors section end
+
+// calendar section
+
+let calendar = document.querySelector(`.calendar`);
+let body = calendar.querySelector(`.calendar-body`);
+let calendarInfo = calendar.querySelector(`.calendar-info`);
+
+
+let date = new Date();
+let year = date.getFullYear();
+let month = date.getMonth();
+
+drawCalendar(body, year, month)
+
+// console.log(getLastDay(2024, 1)); 1 = jan 2 = feb ...
+// console.log(getFirstWeekDay(2024, 1));
+// console.log(getLastWeekDay(2024, 1));
+
+function getLastDay(year, month) {
+  return new Date(year, month + 1, 0).getDate();
+}
+
+function getFirstWeekDay(year, month) {
+  return new Date(year, month, 1).getDay();
+}
+
+function getLastWeekDay(year, month) {
+  return new Date(year, month + 1, 0).getDay();
+}
+
+function range(count) {
+  let arr = [];
+  for (let i = 1; i <= count; i++) {
+    arr.push(i);
+  }
+  return arr;
+}
+
+let calendarMonthDays = range(getLastDay(year, month));
+let firstWeekDay = getFirstWeekDay(year, month);
+let lastWeekDay = getLastWeekDay(year, month);
+
+// Add empty spaces so that days align to week days
+
+function normalize(arr, left, right) {
+  let changedArr = arr;
+  for (let i = 0; i < left; i++) {
+    changedArr.unshift(``);
+  }
+  for (let i = 0; i < 6 - right; i++) {
+    changedArr.push(``);
+  }
+  return changedArr;
+}
+
+let normalizedCalendarMonthDays = normalize(calendarMonthDays,firstWeekDay,lastWeekDay);
+
+// Break the array into sub-arrays (to create weeks)
+
+function chunk(arr, n) {
+  let arrays = [];
+  for (let i = 0; i < arr.length; i += n) {
+    arrays.push(arr.slice(i, i + n));
+  }
+  return arrays;
+}
+
+let calendarArray = chunk(normalizedCalendarMonthDays, 7);
+
+// function that generates the table;
+
+function createCalendarTable(parent, arr) {
+  for (let week of arr) {
+    let tr = document.createElement(`tr`);
+    for (let day of week) {
+      let td = document.createElement(`td`);
+      td.textContent = day;
+      tr.appendChild(td);
+    }
+    parent.appendChild(tr);
+  }
+}
+
+
+// putting the table on the page with everything together
+
+function drawCalendar(body, year, month) {
+  let arr = range(getLastDay(year, month));
+
+  let firstWeekDay = getFirstWeekDay(year, month);
+  let lastWeekDay = getLastWeekDay(year, month);
+
+  let nums = chunk(normalize(arr, firstWeekDay, lastWeekDay), 7);
+
+  createCalendarTable(body, nums);
+}
+
+let calendarButtonPrev = document.getElementById(`calendar-button-prev`);
+let calendarButtonNext = document.getElementById(`calendar-button-next`);
+
+calendarButtonNext.addEventListener('click', function() {
+	draw(body, getNextYear(year, month), 
+		getNextMonth(month)); 
+});
+
+// createCalendarTable(body, calendarArray);
+
+
+
+// calendar section end
+
 // helper functions
 
 function getRandomInt(min, max) {
@@ -1505,3 +1679,5 @@ function shuffle(array) {
   }
   return array;
 }
+
+
