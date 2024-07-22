@@ -1436,7 +1436,7 @@ function markCell() {
   }
 }
 
-let tttWinConditions = [ 
+let tttWinConditions = [
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -1562,12 +1562,11 @@ let calendar = document.querySelector(`.calendar`);
 let body = calendar.querySelector(`.calendar-body`);
 let calendarInfo = calendar.querySelector(`.calendar-info`);
 
-
 let date = new Date();
 let year = date.getFullYear();
 let month = date.getMonth();
 
-drawCalendar(body, year, month)
+drawCalendar(body, year, month);
 
 // console.log(getLastDay(2024, 1)); 1 = jan 2 = feb ...
 // console.log(getFirstWeekDay(2024, 1));
@@ -1610,7 +1609,11 @@ function normalize(arr, left, right) {
   return changedArr;
 }
 
-let normalizedCalendarMonthDays = normalize(calendarMonthDays,firstWeekDay,lastWeekDay);
+let normalizedCalendarMonthDays = normalize(
+  calendarMonthDays,
+  firstWeekDay,
+  lastWeekDay
+);
 
 // Break the array into sub-arrays (to create weeks)
 
@@ -1638,7 +1641,6 @@ function createCalendarTable(parent, arr) {
   }
 }
 
-
 // putting the table on the page with everything together
 
 function drawCalendar(body, year, month) {
@@ -1654,15 +1656,58 @@ function drawCalendar(body, year, month) {
 
 let calendarButtonPrev = document.getElementById(`calendar-button-prev`);
 let calendarButtonNext = document.getElementById(`calendar-button-next`);
+let monthsForCalendar = [
+  `Jan`,
+  `Feb`,
+  `Mar`,
+  `Apr`,
+  `May`,
+  `Jun`,
+  `Jul`,
+  `Aug`,
+  `Sep`,
+  `Oct`,
+  `Nov`,
+  `Dec`,
+];
 
-calendarButtonNext.addEventListener('click', function() {
-	draw(body, getNextYear(year, month), 
-		getNextMonth(month)); 
+calendarButtonNext.addEventListener(`click`, () => {
+  // remove existing calendar
+  let currentCalendar = body.querySelectorAll(`*`);
+  currentCalendar.forEach((elem) => elem.remove());
+
+  // adjust the month and year, redraw it to the output
+  month++;
+  let yearToShow = new Date(year, month).getFullYear();
+
+  calendarInfo.textContent = `${
+    monthsForCalendar[month % monthsForCalendar.length]
+  } ${yearToShow}`;
+
+  // create new table
+  drawCalendar(body, year, month);
+});
+
+calendarButtonPrev.addEventListener(`click`, () => {
+  // remove existing calendar
+  let currentCalendar = body.querySelectorAll(`*`);
+  currentCalendar.forEach((elem) => elem.remove());
+
+  // adjust the month and year, redraw it to the output
+  month--;
+
+  let monthToShow =
+    ((month % monthsForCalendar.length) + monthsForCalendar.length) %
+    monthsForCalendar.length;
+
+  let yearToShow = new Date(year, month).getFullYear();
+  calendarInfo.textContent = `${monthsForCalendar[monthToShow]} ${yearToShow}`;
+
+  // create new table
+  drawCalendar(body, year, month);
 });
 
 // createCalendarTable(body, calendarArray);
-
-
 
 // calendar section end
 
@@ -1679,5 +1724,3 @@ function shuffle(array) {
   }
   return array;
 }
-
-
